@@ -4,7 +4,7 @@ import { header } from './header';
 
 export default class {
   constructor() {
-    const localData = localStorage.getItem('content');
+    const localData = localStorage.getItem('text');
 
     // check if CodeMirror is loaded
     if (typeof CodeMirror === 'undefined') {
@@ -30,13 +30,13 @@ export default class {
     });
 
     this.editor.on('change', () => {
-      localStorage.setItem('content', this.editor.getValue());
+      localStorage.setItem('text', this.editor.getValue());
     });
 
     // Save the content of the editor when the editor itself is loses focus
     this.editor.on('blur', () => {
       console.log('The editor has lost focus');
-      putDb(localStorage.getItem('content'));
+      putDb(localStorage.getItem('text'));
     });
   }
 }

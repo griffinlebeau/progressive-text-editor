@@ -1,21 +1,37 @@
 import { openDB } from 'idb';
+import 'regenerator-runtime/runtime';
 
-const initdb = async () =>
-  openDB('jate', 1, {
+export const initDb = async () => // configure database 
+  openDB('pte_db', 1, {
     upgrade(db) {
-      if (db.objectStoreNames.contains('jate')) {
-        console.log('jate database already exists');
+      if (db.objectStoreNames.contains('pte_db')) {
+        console.log('pte database already exists');
         return;
       }
-      db.createObjectStore('jate', { keyPath: 'id', autoIncrement: true });
-      console.log('jate database created');
+      db.createObjectStore('pte_db', { keyPath: 'id', autoIncrement: true });
+      console.log('pte database created');
     },
   });
 
-// TODO: Add logic to a method that accepts some content and adds it to the database
-export const putDb = async (content) => console.error('putDb not implemented');
+export const putDb = async (content) => {
+  console.log('POST to the database');
+  const pteDb = await openDB('pte_db', 1);
+  const tx = pteDb.transaction('text', 'readwrite');
+  const store = tx.objectStore('text');
+  const request = store.add({ text: content });
+  const result = await request;
+  console.log('data saved to the database', result);
+};
 
-// TODO: Add logic for a method that gets all the content from the database
-export const getDb = async () => console.error('getDb not implemented');
+export const getDb = async () => {
+  console.log('GET from the database');
+  const pteDb= await openDB('pte_db', 1); // create connection
+  const tx = pteDb.transaction('text', 'readonly'); // create transaction
+  const store = tx.objectStore('text'); // open object store
+  const request = store.getAll(); // get all data from database 
+  const result = await request; // confirm the request 
+  console.log('result.value', result);
+  return result;
 
-initdb();
+};
+

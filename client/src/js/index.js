@@ -1,7 +1,7 @@
 import { Workbox } from 'workbox-window';
 import Editor from './editor';
 import './header';
-import './database';
+import { initDb, getDb, postDb } from './database';
 import '../css/style.css';
 import Logo from '../images/logo.png'
 import { Tooltip, Toast, Popover } from 'bootstrap';
@@ -39,4 +39,5 @@ if ('serviceWorker' in navigator) {
 
 window.addEventListener('load', function () {
   document.getElementById('logo').src = Logo;
+  initDb();
 });
