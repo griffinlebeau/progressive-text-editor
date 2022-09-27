@@ -1,3 +1,4 @@
+import { init } from 'express/lib/application';
 import { openDB } from 'idb';
 import 'regenerator-runtime/runtime';
 
@@ -35,3 +36,4 @@ export const getDb = async () => {
 
 };
 
+initDb();

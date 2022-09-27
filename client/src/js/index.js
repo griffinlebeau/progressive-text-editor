@@ -54,6 +54,5 @@ window.addEventListener('appinstalled', (event) => {
 });
 
 window.addEventListener('load', function () {
-  document.getElementById('logo').src = Logo;
   initDb();
 });
