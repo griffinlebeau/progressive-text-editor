@@ -9,9 +9,14 @@
     "server": "cd server nodemon server.js --ignore client",
     "build": "cd client && npm run build",
     "install": "concurrently \"cd client && npm install\" \"cd server && npm install\" ",
-    "client": "cd client && npm start"
+    "client": "cd client && npm start",
+    "heroku-prebuild": "npm install --dev"
+
   },
   "keywords": [],
+  "engines": {
+    "node": "16.15.1"
+  },
   "author": "",
   "license": "ISC",
   "dependencies": {

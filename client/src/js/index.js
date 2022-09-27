@@ -1,7 +1,12 @@
 import { Workbox } from 'workbox-window';
 import Editor from './editor';
+import './header';
 import './database';
 import '../css/style.css';
+import Logo from '../images/logo.png'
+import { Tooltip, Toast, Popover } from 'bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 const main = document.querySelector('#main');
 main.innerHTML = '';
@@ -31,3 +36,7 @@ if ('serviceWorker' in navigator) {
 } else {
   console.error('Service workers are not supported in this browser.');
 }
+
+window.addEventListener('load', function () {
+  document.getElementById('logo').src = Logo;
+});
