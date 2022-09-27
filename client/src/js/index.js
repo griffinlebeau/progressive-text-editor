@@ -6,6 +6,7 @@ import '../css/style.css';
 import Logo from '../images/logo.png'
 import { Tooltip, Toast, Popover } from 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
+const installBtn = document.getElementById('buttonInstall');
 
 
 const main = document.querySelector('#main');
@@ -36,6 +37,21 @@ if ('serviceWorker' in navigator) {
 } else {
   console.error('Service workers are not supported in this browser.');
 }
+
+window.addEventListener('beforeinstallprompt', (event) => {
+  event.preventDefault();
+  installBtn.style.visibility = 'visible';
+  
+  installBtn.addEventListener('click', () => {
+    event.prompt();
+    installBtn.setAttribute('disabled', true);
+    installBtn.textContent = 'Installed!';
+  });
+});
+
+window.addEventListener('appinstalled', (event) => {
+  console.log('👍', 'appinstalled', event);
+});
 
 window.addEventListener('load', function () {
   document.getElementById('logo').src = Logo;
